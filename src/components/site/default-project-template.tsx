@@ -6,38 +6,25 @@ type DefaultProjectTemplateProps = {
 
 export function DefaultProjectTemplate({ project }: DefaultProjectTemplateProps) {
   return (
-    <>
-      <section className="pt-4">
+    <section className="pt-6">
+      <div className="surface-panel px-6 py-6 md:px-8 md:py-8 xl:px-10">
+        <div className="pb-8">
+          <div className="max-w-2xl">
+            <h2 className="section-title text-slate-50">How the project comes together</h2>
+          </div>
+        </div>
+
         <div className="grid gap-4 lg:grid-cols-3">
           {project.sections.map((section) => (
-            <article
-              className="rounded-[1.75rem] border border-white/10 bg-[rgba(16,18,26,0.92)] p-6 shadow-[0_18px_48px_rgba(0,0,0,0.35)]"
-              key={section.title}
-            >
-              <h2 className="text-2xl font-semibold tracking-[-0.04em] text-slate-50">
+            <article className="surface-card-soft p-6" key={section.title}>
+              <h3 className="text-2xl font-semibold tracking-[-0.04em] text-slate-50">
                 {section.title}
-              </h2>
-              <p className="mt-4 text-base leading-8 text-slate-400">{section.text}</p>
+              </h3>
+              <p className="section-copy mt-4 text-base">{section.text}</p>
             </article>
           ))}
         </div>
-      </section>
-
-      <section className="pt-6">
-        <div className="rounded-[1.75rem] border border-white/10 bg-[rgba(16,18,26,0.92)] p-6 shadow-[0_18px_48px_rgba(0,0,0,0.35)] md:p-8">
-          <p className="font-mono text-sm uppercase tracking-[0.24em] text-sky-300">Highlights</p>
-          <ul className="mt-6 grid gap-4 text-base leading-8 text-slate-300 md:grid-cols-3">
-            {project.highlights.map((item) => (
-              <li
-                className="rounded-[1.25rem] border border-white/8 bg-white/5 px-4 py-4"
-                key={item}
-              >
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 }

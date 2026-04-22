@@ -46,9 +46,13 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   const isHomeServer = project.customTemplate === "home-server";
 
   return (
-    <PortfolioShell currentSlug={project.slug} wide={isHomeServer}>
+    <PortfolioShell currentSlug={project.slug}>
       <ProjectHero project={project} />
-      {isHomeServer ? <HomeServerTemplate project={project} /> : <DefaultProjectTemplate project={project} />}
+      {isHomeServer ? (
+        <HomeServerTemplate project={project} />
+      ) : (
+        <DefaultProjectTemplate project={project} />
+      )}
       <ContactPanel />
     </PortfolioShell>
   );

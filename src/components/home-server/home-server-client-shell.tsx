@@ -2,20 +2,23 @@
 
 import dynamic from "next/dynamic";
 
+import type { HomeServerContent } from "@/content/portfolio";
+
 const HomeServerExperience = dynamic(() => import("./home-server-experience"), {
   ssr: false,
   loading: () => (
-    <div className="grid-panel p-6 md:p-8">
+    <div className="surface-panel surface-panel-grid px-6 py-6 md:px-8 md:py-8">
       <div className="relative z-10">
-        <p className="font-mono text-sm uppercase tracking-[0.24em] text-sky-300">
-          Interactive Rack
-        </p>
-        <p className="mt-4 text-base leading-8 text-slate-400">Loading the rack view...</p>
+        <p className="section-copy text-base">Loading the rack view...</p>
       </div>
     </div>
   ),
 });
 
-export function HomeServerClientShell() {
-  return <HomeServerExperience />;
+type HomeServerClientShellProps = {
+  homeServer: HomeServerContent;
+};
+
+export function HomeServerClientShell({ homeServer }: HomeServerClientShellProps) {
+  return <HomeServerExperience homeServer={homeServer} />;
 }

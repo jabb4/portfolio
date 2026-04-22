@@ -5,18 +5,13 @@ import { SiteHeader } from "./site-header";
 type PortfolioShellProps = {
   children: ReactNode;
   currentSlug?: string;
-  wide?: boolean;
 };
 
-export function PortfolioShell({
-  children,
-  currentSlug,
-  wide = false,
-}: PortfolioShellProps) {
+export function PortfolioShell({ children, currentSlug }: PortfolioShellProps) {
   return (
-    <div className={`mx-auto w-full px-3 pb-12 md:px-4 ${wide ? "max-w-[1320px]" : "max-w-[1080px]"}`}>
+    <div className="mx-auto w-full max-w-[1240px] px-4 pb-14 md:px-5 lg:px-6">
       <SiteHeader currentSlug={currentSlug} />
-      <main className={wide ? "pt-10 md:pt-12" : "pt-14"}>{children}</main>
+      <main className="pt-10 md:pt-12">{children}</main>
     </div>
   );
 }

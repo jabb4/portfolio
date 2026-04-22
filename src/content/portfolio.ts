@@ -12,7 +12,6 @@ export type ProjectLink = {
 
 export type Profile = {
   name: string;
-  helloLine: string;
   introTitle: string;
   introCopy: string;
   profileImage: string;
@@ -32,6 +31,7 @@ export type Project = {
   featured: boolean;
   summary: string;
   stack: string[];
+  heroTags?: string[];
   sections: ProjectSection[];
   highlights: string[];
   links: ProjectLink[];
@@ -46,7 +46,6 @@ export type HomeServerFact = {
 export type HomeServerDevice = {
   id: string;
   title: string;
-  buttonMeta: string;
   role: string;
   summary: string;
   facts: HomeServerFact[];
@@ -71,7 +70,6 @@ export type PortfolioContent = {
 export const portfolio: PortfolioContent = {
   profile: {
     name: "Jacob Bengtsson",
-    helloLine: 'print("Hello world!")',
     introTitle: "I'm Jacob, and this is where I keep the projects I'm proud of.",
     introCopy:
       "I enjoy being creative and building new things that are fun. I'm driven by finding solutions to real-life problems.",
@@ -82,7 +80,7 @@ export const portfolio: PortfolioContent = {
     linkedin: "https://www.linkedin.com/in/yourname/",
     contactTitle: "Let's talk.",
     contactCopy:
-      "If you're hiring for a software engineering role and want someone who cares about both product quality and implementation details, I'd be glad to talk.",
+      "I'm always interested in new challenges, so if you have an idea and find my work interesting, I'd be glad to talk.",
   },
   projects: [
     {
@@ -95,6 +93,15 @@ export const portfolio: PortfolioContent = {
       summary:
         "A self-built 12U home lab with Proxmox, a Talos Kubernetes cluster, dedicated Raspberry Pi utility nodes, UPS protection, and segmented networking.",
       stack: ["Proxmox", "Talos", "Kubernetes", "Raspberry Pi"],
+      heroTags: [
+        "Proxmox",
+        "Kubernetes",
+        "Linux",
+        "DNS",
+        "Docker",
+        "Self-Hosting",
+        "Networking",
+      ],
       sections: [
         {
           title: "Overview",
@@ -206,11 +213,10 @@ export const portfolio: PortfolioContent = {
     devicesById: {
       stratton: {
         id: "stratton",
-        title: "Stratton",
-        buttonMeta: "4U / Proxmox",
+        title: "Server",
         role: "Primary compute and service host",
         summary:
-          "Stratton is the core of the rack: a 4U Proxmox server that hosts the Talos Kubernetes nodes plus the remaining legacy VMs for storage, apps, Home Assistant, and edge services.",
+          "The server is the core of the rack: a 4U Proxmox host that runs the Talos Kubernetes nodes plus the remaining legacy VMs for storage, apps, Home Assistant, and edge services.",
         facts: [
           { label: "Form factor", value: "4U rack server" },
           { label: "Host OS", value: "Proxmox VE" },
@@ -230,11 +236,10 @@ export const portfolio: PortfolioContent = {
       },
       rocky: {
         id: "rocky",
-        title: "Rocky",
-        buttonMeta: "Pi 5 / Pi-hole",
+        title: "DNS",
         role: "DNS filtering and resolution",
         summary:
-          "Rocky handles local DNS for the rack and gives the lab a dedicated Raspberry Pi service node for filtering and name resolution on the services network.",
+          "DNS handles local name resolution for the rack and gives the lab a dedicated Raspberry Pi service node for filtering and resolution on the services network.",
         facts: [
           { label: "Hardware", value: "Raspberry Pi 5" },
           { label: "Role", value: "DNS services" },
@@ -244,15 +249,14 @@ export const portfolio: PortfolioContent = {
         ],
         services: ["Pi-hole"],
         footnote:
-          "Rocky is intentionally small but critical: it keeps DNS separate from the main server and aligned with the services network.",
+          "This node is intentionally small but critical: it keeps DNS separate from the main server and aligned with the services network.",
       },
       nut: {
         id: "nut",
-        title: "NUT",
-        buttonMeta: "Pi 3B+ / UPS",
+        title: "UPS Management",
         role: "Power monitoring and safe shutdown orchestration",
         summary:
-          "The NUT node keeps the UPS integration independent from the main host, which lets the rack handle graceful shutdown flows without tying them directly to Stratton.",
+          "UPS Management keeps the UPS integration independent from the main host, which lets the rack handle graceful shutdown flows without tying them directly to the server.",
         facts: [
           { label: "Hardware", value: "Raspberry Pi 3B+" },
           { label: "Host OS", value: "DietPi" },
@@ -265,7 +269,6 @@ export const portfolio: PortfolioContent = {
       router: {
         id: "router",
         title: "Router",
-        buttonMeta: "1U / Edge",
         role: "Rack edge routing and network segmentation",
         summary:
           "The router is the rack's network boundary. It ties together the default LAN, management, services, and legacy VM networks and is the best place to understand how the lab is segmented.",
@@ -291,10 +294,9 @@ export const portfolio: PortfolioContent = {
       ups: {
         id: "ups",
         title: "UPS",
-        buttonMeta: "2U / Power",
         role: "Battery-backed power and shutdown safety net",
         summary:
-          "The UPS anchors the bottom of the rack and protects the rest of the system against abrupt power loss. It is paired with the NUT node for graceful shutdown behavior.",
+          "The UPS anchors the bottom of the rack and protects the rest of the system against abrupt power loss. It is paired with UPS Management for graceful shutdown behavior.",
         facts: [
           { label: "Form factor", value: "2U rack UPS" },
           { label: "Integration", value: "Managed through NUT" },

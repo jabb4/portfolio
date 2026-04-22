@@ -1,6 +1,6 @@
 # Portfolio
 
-Portfolio site rebuilt with `Next.js` App Router, `Tailwind CSS`, and a typed content model.
+Portfolio site built with `Next.js` App Router, `Tailwind CSS`, and a typed content model.
 
 ## Structure
 
@@ -43,12 +43,34 @@ npm run build
 
 This creates a static export in `out/`.
 
-## GitHub Pages
-
-Build with the repository subpath set through `NEXT_PUBLIC_BASE_PATH`:
+For a quick local preview of the exported site:
 
 ```bash
-NEXT_PUBLIC_BASE_PATH=/portfolio npm run build
+python3 -m http.server 3000 --directory out
 ```
 
-Replace `/portfolio` with your repository path if it differs. The generated `out/` directory is ready for static hosting, and `public/.nojekyll` ensures the exported `_next/` assets are served correctly on GitHub Pages.
+## GitHub Pages
+
+This repo is set up for GitHub Pages with a GitHub Actions workflow at
+[`/.github/workflows/deploy-pages.yml`](/Users/jacob/Projects/portfolio/.github/workflows/deploy-pages.yml).
+It builds and deploys automatically on pushes to `main`.
+
+This setup assumes the site is hosted at the root of your GitHub Pages domain,
+for example `https://jabb4.github.io/` or a custom domain. It does not include
+project-site subpath handling like `/portfolio`.
+
+One-time GitHub setup:
+
+1. Open the repository on GitHub.
+2. Go to `Settings` -> `Pages`.
+3. Under `Build and deployment`, set `Source` to `GitHub Actions`.
+
+To verify the production export locally:
+
+```bash
+npm run build
+```
+
+The generated `out/` directory is ready for static hosting, and
+`public/.nojekyll` ensures the exported `_next/` assets are served correctly on
+GitHub Pages.
