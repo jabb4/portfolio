@@ -153,16 +153,18 @@ export default function HomeServerExperience({ homeServer }: HomeServerExperienc
                 ))}
               </div>
 
-              <div>
-                <p className="section-kicker">Key Services</p>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {inspectorDevice.services.map((service) => (
-                    <span className="tag-pill" key={`${inspectorDevice.id}-${service}`}>
-                      {service}
-                    </span>
-                  ))}
+              {inspectorDevice.services.length ? (
+                <div>
+                  <p className="section-kicker">Key Services</p>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {inspectorDevice.services.map((service) => (
+                      <span className="tag-pill" key={`${inspectorDevice.id}-${service}`}>
+                        {service}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              ) : null}
             </div>
           </aside>
         </div>

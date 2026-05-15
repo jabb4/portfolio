@@ -50,7 +50,6 @@ export type HomeServerDevice = {
   summary: string;
   facts: HomeServerFact[];
   services: string[];
-  footnote: string;
 };
 
 export type HomeServerContent = {
@@ -206,7 +205,7 @@ export const portfolio: PortfolioContent = {
     },
   ],
   homeServer: {
-    heading: "Home server rack",
+    heading: "Server rack",
     intro: "Hover or select hardware in the rack to inspect how the lab is assembled.",
     fallbackMessage: "3D preview unavailable. Use the device list to inspect the rack.",
     deviceOrder: ["stratton", "router", "rocky", "nut", "ups"],
@@ -218,21 +217,21 @@ export const portfolio: PortfolioContent = {
         summary:
           "The server is the core of the rack: a 4U Proxmox host that runs the Talos Kubernetes nodes plus the remaining legacy VMs for storage, apps, Home Assistant, and edge services.",
         facts: [
-          { label: "Form factor", value: "4U rack server" },
-          { label: "Host OS", value: "Proxmox VE" },
-          { label: "Management IP", value: "10.0.10.10" },
-          { label: "Service plane", value: "10.0.20.10 API VIP" },
+          { label: "Hardware", value: "Custom build server PC" },
+          { label: "Host OS", value: "Proxmox" },
         ],
         services: [
-          "Talos cluster",
-          "TrueNAS",
-          "Apps VM",
-          "Media stack",
           "Home Assistant",
-          "DMZ",
+          "TrueNAS",
+          "Grafana",
+          "Prometheus",
+          "Traefik",
+          "Authentik",
+          "Uptime Kuma",
+          "Jellyfin",
+          "Immich",
+          "Paperless-ngx",
         ],
-        footnote:
-          "The workload and service inventory below is sourced from the public home-server repository and is rendered as static portfolio content for GitHub Pages.",
       },
       rocky: {
         id: "rocky",
@@ -242,14 +241,9 @@ export const portfolio: PortfolioContent = {
           "DNS handles local name resolution for the rack and gives the lab a dedicated Raspberry Pi service node for filtering and resolution on the services network.",
         facts: [
           { label: "Hardware", value: "Raspberry Pi 5" },
-          { label: "Role", value: "DNS services" },
-          { label: "Core service", value: "Pi-hole" },
-          { label: "IP", value: "10.0.20.53" },
-          { label: "Rack slot", value: "Half-width in U8" },
+          { label: "Host OS", value: "DietPi" },
         ],
         services: ["Pi-hole"],
-        footnote:
-          "This node is intentionally small but critical: it keeps DNS separate from the main server and aligned with the services network.",
       },
       nut: {
         id: "nut",
@@ -260,11 +254,8 @@ export const portfolio: PortfolioContent = {
         facts: [
           { label: "Hardware", value: "Raspberry Pi 3B+" },
           { label: "Host OS", value: "DietPi" },
-          { label: "IP", value: "192.168.20.70" },
-          { label: "Rack slot", value: "Half-width in U8" },
         ],
-        services: ["NUT", "Safe shutdowns"],
-        footnote: "This is the power-control bridge between the UPS and the rest of the rack.",
+        services: ["NUT"],
       },
       router: {
         id: "router",
@@ -273,23 +264,10 @@ export const portfolio: PortfolioContent = {
         summary:
           "The router is the rack's network boundary. It ties together the default LAN, management, services, and legacy VM networks and is the best place to understand how the lab is segmented.",
         facts: [
-          { label: "Form factor", value: "1U router" },
-          { label: "Rack slot", value: "U10 / third from top" },
-          { label: "Model", value: "Fill in router model" },
-          { label: "WAN", value: "Fill in WAN uplink" },
-          {
-            label: "Segments",
-            value: "Default + management + services + legacy",
-          },
+          { label: "Hardware", value: "UniFi Dream Machine SE" },
+          { label: "Host OS", value: "UniFi OS" },
         ],
-        services: [
-          "WAN uplink",
-          "LAN routing",
-          "Segmentation",
-          "Firewall policy",
-        ],
-        footnote:
-          "Router model and WAN specifics are placeholders; the live subnet layout below is sourced from the repository.",
+        services: ["Firewall", "Routing"],
       },
       ups: {
         id: "ups",
@@ -298,14 +276,10 @@ export const portfolio: PortfolioContent = {
         summary:
           "The UPS anchors the bottom of the rack and protects the rest of the system against abrupt power loss. It is paired with UPS Management for graceful shutdown behavior.",
         facts: [
-          { label: "Form factor", value: "2U rack UPS" },
-          { label: "Integration", value: "Managed through NUT" },
-          { label: "Purpose", value: "Battery backup + safe shutdowns" },
-          { label: "Rack slot", value: "Bottom 2U" },
+          { label: "Hardware", value: "PowerWalker VI 2000 RLP" },
+          { label: "Host OS", value: "None" },
         ],
-        services: ["Battery backup", "Power conditioning", "Shutdown path"],
-        footnote:
-          "The UPS is modeled as infrastructure hardware rather than a software workload, but it is a key reliability component of the rack.",
+        services: [],
       },
     },
   },
